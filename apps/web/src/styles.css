@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Grotesk", "Syne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "blur-vision-ascii", "JetBrains Mono", "Space Mono", "Fira Code", monospace;
+  
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  
+  --color-card: #000000;
+  --color-card-foreground: #ffffff;
+  
+  --color-popover: #000000;
+  --color-popover-foreground: #ffffff;
+  
+  --color-primary: #00ff41;
+  --color-primary-foreground: #000000;
+  
+  --color-secondary: #111111;
+  --color-secondary-foreground: #ffffff;
+  
+  --color-muted: #111111;
+  --color-muted-foreground: #888888;
+  
+  --color-accent: #00ff41;
+  --color-accent-foreground: #000000;
+  
+  --color-destructive: #ff003c;
+  --color-destructive-foreground: #ffffff;
+  
+  --color-border: #333333;
+  --color-input: #111111;
+  --color-ring: #00ff41;
+  
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-pulse-glow: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 15px rgba(0, 255, 65, 0.6); }
+  50% { opacity: .5; box-shadow: 0 0 5px rgba(0, 255, 65, 0.2); }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* Custom utility for the retro grid effect */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
