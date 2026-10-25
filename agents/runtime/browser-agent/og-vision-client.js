@@ -51,9 +51,11 @@ function extractAttestation(json, headers = null) {
   const tee = json?.tee || json?.verification || json?.attestation || null;
   const traceHeader = headers?.get?.('x_0g_trace.tee_verified') || headers?.get?.('x-0g-tee');
 
+  // Only an explicit `true` counts as verified: a missing flag is absence of
+  // evidence, and Boolean("false") would otherwise read as true.
   if (tee) {
     return {
-      verified: Boolean(tee.verified ?? tee.valid ?? tee.success ?? true),
+      verified: (tee.verified ?? tee.valid ?? tee.success) === true,
       signature: tee.signature || tee.sig || null,
       signingAddress: tee.signing_address || tee.address || null,
       provider: tee.provider || json?.provider || null,

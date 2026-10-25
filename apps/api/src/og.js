@@ -133,10 +133,12 @@ async function runOn0GCompute(task, input) {
 
   // The TEE attestation is the part that matters: it is evidence the agent could
   // not have produced itself.
+  // Only an explicit `true` counts as verified. A missing flag is absence of
+  // evidence, not evidence — and Boolean("false") would otherwise read as true.
   const tee = json?.tee || json?.verification || json?.attestation || null;
   const attestation = tee
     ? {
-        verified: Boolean(tee.verified ?? tee.valid ?? tee.success ?? true),
+        verified: (tee.verified ?? tee.valid ?? tee.success) === true,
         signature: tee.signature || tee.sig || null,
         signingAddress: tee.signing_address || tee.address || null,
         provider: tee.provider || json?.provider || null,
